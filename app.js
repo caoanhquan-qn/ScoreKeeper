@@ -8,7 +8,7 @@ let initialScorePlayerOne = 0;
 let initialScorePlayerTwo = 0;
 firstButton.addEventListener('click', function () {
     initialScorePlayerOne++;
-    playerOneScore.innerText = `${initialScorePlayerOne}`;
+    playerOneScore.innerText = initialScorePlayerOne;
     if (playerOneScore.innerText === selectScore.value) {
         firstButton.disabled = true;
         secondButton.disabled = true;
@@ -22,7 +22,7 @@ firstButton.addEventListener('click', function () {
 
 secondButton.addEventListener('click', function () {
     initialScorePlayerTwo++;
-    playerTwoScore.innerText = `${initialScorePlayerTwo}`;
+    playerTwoScore.innerText = initialScorePlayerTwo;
     if (playerTwoScore.innerText === selectScore.value) {
         firstButton.disabled = true;
         secondButton.disabled = true;
