@@ -1,47 +1,49 @@
-const firstButton = document.querySelector('#btn-one');
-const secondButton = document.querySelector('#btn-two');
-const playerOneScore = document.querySelector('#firstPlayer');
-const playerTwoScore = document.querySelector('#secondPlayer');
+let p1 = {
+    button: document.querySelector('#btn-one'),
+    score: document.querySelector('#firstPlayer'),
+    initialScore: 0
+}
+
+let p2 = {
+    button: document.querySelector('#btn-two'),
+    score: document.querySelector('#secondPlayer'),
+    initialScore: 0
+}
+
 const selectScore = document.querySelector('select');
 const resetButton = document.querySelector('#btn-reset');
-let initialScorePlayerOne = 0;
-let initialScorePlayerTwo = 0;
+
 function gameOver() {
-    firstButton.disabled = true;
-    secondButton.disabled = true;
+    p1.button.disabled = true;
+    p2.button.disabled = true;
 }
-firstButton.addEventListener('click', function () {
-    initialScorePlayerOne++;
-    playerOneScore.innerText = initialScorePlayerOne;
-    if (parseInt(playerOneScore.innerText) === parseInt(selectScore.value)) {
-        gameOver();
-        playerOneScore.classList.add('has-text-primary');
-        playerTwoScore.classList.add('has-text-danger');
-    }
 
-})
-
-secondButton.addEventListener('click', function () {
-    initialScorePlayerTwo++;
-    playerTwoScore.innerText = initialScorePlayerTwo;
-    if (parseInt(playerTwoScore.innerText) === parseInt(selectScore.value)) {
+function updateScore(player1, player2) {
+    player1.initialScore += 1;
+    player1.score.innerText = player1.initialScore;
+    if (parseInt(player1.score.innerText) === parseInt(selectScore.value)) {
         gameOver();
-        playerOneScore.classList.add('has-text-danger');
-        playerTwoScore.classList.add('has-text-primary');
+        player1.score.classList.add('has-text-primary');
+        player2.score.classList.add('has-text-danger');
     }
-})
+}
+
+p1.button.addEventListener('click', function () {
+    updateScore(p1, p2);
+});
+p2.button.addEventListener('click', function () {
+    updateScore(p2, p1);
+});
 
 resetButton.addEventListener('click', function () {
     window.location.reload();
 })
 
 selectScore.addEventListener('change', function () {
-    playerOneScore.innerText = 0;
-    playerTwoScore.innerText = 0;
-    playerOneScore.classList.remove('has-text-primary', 'has-text-danger');
-    playerTwoScore.classList.remove('has-text-primary', 'has-text-danger');
-    initialScorePlayerOne = 0;
-    initialScorePlayerTwo = 0;
-    firstButton.disabled = false;
-    secondButton.disabled = false;
+    for (let p of [p1, p2]) {
+        p.score.innerText = 0;
+        p.score.classList.remove('has-text-primary', 'has-text-danger');
+        p.initialScore = 0;
+        p.button.disabled = false;
+    }
 })
