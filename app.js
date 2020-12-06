@@ -6,16 +6,17 @@ const selectScore = document.querySelector('select');
 const resetButton = document.querySelector('#btn-reset');
 let initialScorePlayerOne = 0;
 let initialScorePlayerTwo = 0;
+function gameOver() {
+    firstButton.disabled = true;
+    secondButton.disabled = true;
+}
 firstButton.addEventListener('click', function () {
     initialScorePlayerOne++;
     playerOneScore.innerText = initialScorePlayerOne;
     if (parseInt(playerOneScore.innerText) === parseInt(selectScore.value)) {
-        firstButton.disabled = true;
-        secondButton.disabled = true;
-        firstButton.style.backgroundColor = `rgba(0,255,0,0.2)`;
-        secondButton.style.backgroundColor = `rgba(0,0,255,0.2)`;
-        playerOneScore.style.color = `rgb(0,255,0)`;
-        playerTwoScore.style.color = `rgb(255,0,0)`;
+        gameOver();
+        playerOneScore.classList.add('has-text-primary');
+        playerTwoScore.classList.add('has-text-danger');
     }
 
 })
@@ -24,12 +25,9 @@ secondButton.addEventListener('click', function () {
     initialScorePlayerTwo++;
     playerTwoScore.innerText = initialScorePlayerTwo;
     if (parseInt(playerTwoScore.innerText) === parseInt(selectScore.value)) {
-        firstButton.disabled = true;
-        secondButton.disabled = true;
-        firstButton.style.backgroundColor = `rgba(0,255,0,0.2)`;
-        secondButton.style.backgroundColor = `rgba(0,0,255,0.2)`;
-        playerOneScore.style.color = `rgb(255,0,0)`;
-        playerTwoScore.style.color = `rgb(0,255,0)`;
+        gameOver();
+        playerOneScore.classList.add('has-text-danger');
+        playerTwoScore.classList.add('has-text-primary');
     }
 })
 
@@ -40,6 +38,10 @@ resetButton.addEventListener('click', function () {
 selectScore.addEventListener('change', function () {
     playerOneScore.innerText = 0;
     playerTwoScore.innerText = 0;
+    playerOneScore.classList.remove('has-text-primary', 'has-text-danger');
+    playerTwoScore.classList.remove('has-text-primary', 'has-text-danger');
     initialScorePlayerOne = 0;
     initialScorePlayerTwo = 0;
+    firstButton.disabled = false;
+    secondButton.disabled = false;
 })
