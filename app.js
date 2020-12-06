@@ -9,7 +9,7 @@ let initialScorePlayerTwo = 0;
 firstButton.addEventListener('click', function () {
     initialScorePlayerOne++;
     playerOneScore.innerText = initialScorePlayerOne;
-    if (playerOneScore.innerText === selectScore.value) {
+    if (parseInt(playerOneScore.innerText) === parseInt(selectScore.value)) {
         firstButton.disabled = true;
         secondButton.disabled = true;
         firstButton.style.backgroundColor = `rgba(0,255,0,0.2)`;
@@ -23,7 +23,7 @@ firstButton.addEventListener('click', function () {
 secondButton.addEventListener('click', function () {
     initialScorePlayerTwo++;
     playerTwoScore.innerText = initialScorePlayerTwo;
-    if (playerTwoScore.innerText === selectScore.value) {
+    if (parseInt(playerTwoScore.innerText) === parseInt(selectScore.value)) {
         firstButton.disabled = true;
         secondButton.disabled = true;
         firstButton.style.backgroundColor = `rgba(0,255,0,0.2)`;
@@ -35,4 +35,11 @@ secondButton.addEventListener('click', function () {
 
 resetButton.addEventListener('click', function () {
     window.location.reload();
+})
+
+selectScore.addEventListener('change', function () {
+    playerOneScore.innerText = 0;
+    playerTwoScore.innerText = 0;
+    initialScorePlayerOne = 0;
+    initialScorePlayerTwo = 0;
 })
