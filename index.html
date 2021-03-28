@@ -8,9 +8,39 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"
     />
+    <link rel="text/css" href="queries.css" />
     <style>
+      body {
+        overflow: hidden;
+      }
       .card {
         width: 75%;
+      }
+      @media only screen and (max-width: 1024px) {
+        .card {
+          width: 100%;
+        }
+      }
+      @media only screen and (max-width: 768px) {
+        .card {
+          max-width: 75%;
+        }
+      }
+      @media only screen and (max-width: 480px) {
+        .card {
+          max-width: 100%;
+        }
+        .section {
+          padding: 0;
+          margin-top: 10px;
+        }
+      }
+      /* Galaxy Fold */
+      @media only screen and (max-width: 280px) {
+        .card-footer {
+          display: flex;
+          flex-direction: column;
+        }
       }
     </style>
   </head>
